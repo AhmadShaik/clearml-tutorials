@@ -57,4 +57,40 @@
   ClearML setup completed successfully.    
   ```
   In this web_server URL, api_server URL and files_server URLS by default assigned to clearML open server. If we run the server locally that address will change to localhost. Or if you run it on aws instance we might need to specify the URLs.
-    
+
+## Step-3 Executing the Script Locally
+  Now we run the toy_example.py script. This script develops classifier for mnist data. In the file most of the code looks almost the same for any tensorflow based model development pipeline except two lines which are.
+
+  ```
+  from clearml import Task
+  task = Task.init(project_name='toy_example',
+                  task_name='tensorflow_training')
+
+  ```  
+  Here we make use of the Task functionality from clearML. By initilizing the task with necessary project details, when we run the script, it automatically starts loging the necessary information and also starts pushing the logs to the server.
+  In the log itself we get a link related to clearml server from where we can see the project status.
+
+  The log would look something like this.
+
+  ```
+  ClearML Task: overwriting (reusing) task id=6038b696fe5b4ce49e1de28b74437d2d
+  ClearML results page: https://app.clear.ml/projects/c4df3b09bea5672aafb077207/experiments/b7446038b696fe537d2db4ce49e1de28/output/log
+/service.cc:176]   StreamExecutor device (0): GeForce GTX 1660 Ti, Compute Capability 7.5
+  Epoch 1/5
+  2022-02-03 14:32:53.361582: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+  60000/60000 [==============================] - 3s 52us/sample - loss: 0.2896 - acc: 0.9165
+  Epoch 2/5
+  60000/60000 [==============================] - 3s 47us/sample - loss: 0.1423 - acc: 0.9575
+  Epoch 3/5
+  60000/60000 [==============================] - 3s 48us/sample - loss: 0.1058 - acc: 0.9679
+  Epoch 4/5
+  60000/60000 [==============================] - 3s 48us/sample - loss: 0.0872 - acc: 0.9732
+  Epoch 5/5
+  60000/60000 [==============================] - 3s 48us/sample - loss: 0.0734 - acc: 0.9764
+  10000/10000 - 0s - loss: 0.0795 - acc: 0.9745
+  ```
+## Step-4 Validating the Execution on the Server.
+  By opening the server, you can see the details related to the current execution along with necessary logging.
+  ![image11](images/server_validation.png "withvswothput_light")  
+
+  In the top we can see some more information using which we can see the related data. 

@@ -1,5 +1,6 @@
 from tabnanny import verbose
 import tensorflow as tf
+
 from clearml import Task
 task = Task.init(project_name='toy_example',
                 task_name='tensorflow_training')
